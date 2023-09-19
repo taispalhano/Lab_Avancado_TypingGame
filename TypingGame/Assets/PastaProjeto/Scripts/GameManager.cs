@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,28 +12,44 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    [SerializeField] private float typingSpeed;
+    private AudioSource fonteSom;
 
-    [SerializeField] private TextMeshProUGUI typingSpeedText;
+    [SerializeField] private float velocidadeDeEscrita;
 
-    private float lastTime;
-    private float elapsedTime;
+    [SerializeField] private TextMeshProUGUI velocidadeDeEscritaTexto;
+    [SerializeField] private TextMeshProUGUI pontosTexto;
 
-    private int lettersTyped;
+    public int _pontos;
+
+    private float tempoPassado;
+
+    private int letrasEscritas;
+
+    private void Start()
+    {
+        fonteSom = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
-        if (elapsedTime >= 0.5f)
+        if (tempoPassado >= 0.5f)
         {
-            typingSpeed = lettersTyped;
-            typingSpeedText.text = $"{typingSpeed} / Second";
-            lettersTyped = 0;
-            elapsedTime = 0f;
+            velocidadeDeEscrita = letrasEscritas;
+            velocidadeDeEscritaTexto.text = $"{velocidadeDeEscrita} / Segundo";
+            letrasEscritas = 0;
+            tempoPassado = 0f;
         }
-        else elapsedTime += Time.deltaTime;
+        else tempoPassado += Time.deltaTime;
+        pontosTexto.text = $"Pontuação: {_pontos}";
+
+        if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    public void RegisterLetter()
+    public void RegistrarLetra()
     {
-         lettersTyped++;
+         letrasEscritas++;
+    }
+    public void TocarSom(AudioClip clip)
+    {
+        fonteSom.PlayOneShot(clip);
     }
 }

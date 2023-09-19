@@ -7,52 +7,71 @@ public class Typer : MonoBehaviour
 {
     public TextMeshProUGUI wordLabel = null;
 
-    [SerializeField] private string remainingWord;
-    [SerializeField] private string currentWord;
+    [SerializeField] private string fraseRestante;
+    [SerializeField] private string fraseAtual;
+    private int tamanhoUltimaFrase;
 
-    [SerializeField] private WordPackage wordPackage;
+    [SerializeField] private WordPackage pacoteDeFrases;
+
+    public AudioClip errou;
+    public AudioClip fraseCorreta;
 
     private void Start()
     {
-        SetCurrentWord();
+        AtribuirFrase();
     }
-    private void SetCurrentWord()
+    private void AtribuirFrase()
     {
-        currentWord = wordPackage.GetRandomWord();
-        SetRemainingWord(currentWord);
+        fraseAtual = pacoteDeFrases.PegarPalavraAleatoria();
+        tamanhoUltimaFrase = fraseAtual.Length;
+        AtribuirFraseRestante(fraseAtual);
     }
-    private void SetRemainingWord(string newString)
+    private void AtribuirFraseRestante(string novaString)
     {
-        remainingWord = newString;
-        wordLabel.text = remainingWord;  
+        fraseRestante = novaString;
+        wordLabel.text = fraseRestante;  
     }
     private void Update()
     {
-        CheckInput();
+        ChecarInput();
     }
-    private void CheckInput()
+    private void ChecarInput()
     {
         if (Input.anyKeyDown)
         {
-            string keysPressed = Input.inputString;
-            if (keysPressed.Length == 1) EnterLetter(keysPressed);
+            string teclaAperdada = Input.inputString;
+            if (teclaAperdada.Length == 1) TentarLetra(teclaAperdada);
         }
     }
-    private void EnterLetter(string typedLetter)
+    private void TentarLetra(string letraEscrita)
     {
-        if (IsCorrectLetter(typedLetter))
+        if (LetraEstaCorreta(letraEscrita))
         {
-            RemoveLetter();
-            GameManager.instance.RegisterLetter();
+            RemoverLetra();
+            GameManager.instance.RegistrarLetra();
 
-            if (IsWordComplete()) SetCurrentWord();
+            if (PalavraEstaCompleta())
+            {
+                GameManager.instance._pontos += tamanhoUltimaFrase * 2;
+                GameManager.instance.TocarSom(fraseCorreta);
+                tamanhoUltimaFrase = 0;
+
+                AtribuirFrase();
+            }
         }
+        else GameManager.instance.TocarSom(errou);
     }
-    private bool IsCorrectLetter(string letter) => remainingWord.IndexOf(letter) == 0;
-    private void RemoveLetter()
+    private bool LetraEstaCorreta(string letra)
     {
-        string newString = remainingWord.Remove(0, 1);
-        SetRemainingWord(newString);
+        return fraseRestante.IndexOf(letra) == 0;
     }
-    private bool IsWordComplete() => remainingWord.Length == 0;
+    private void RemoverLetra()
+    {
+        string novaString = fraseRestante.Remove(0, 1);
+        AtribuirFraseRestante(novaString);
+    }
+    private bool PalavraEstaCompleta()
+    {
+        return fraseRestante.Length == 0;
+    }
 }

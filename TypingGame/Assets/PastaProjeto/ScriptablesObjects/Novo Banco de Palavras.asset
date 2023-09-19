@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07610a388c0317b42a82a321930dc697, type: 3}
   m_Name: Novo Banco de Palavras
   m_EditorClassIdentifier: 
-  phrases:
-  - Good morning sir
-  - How is your morning?
+  frases:
+  - Oh, my precious ember burning my sweet glowing light
+  - From the moment I first saw you I was yours, and you were mine
+  - Deep down we both knew you were trouble by design
+  - 'And the echo of my mother''s words: Baby, don''t you play with fire'
