@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07610a388c0317b42a82a321930dc697, type: 3}
+  m_Name: Fase 2
+  m_EditorClassIdentifier: 
+  frases:
+  - Oh, my precious ember burning my sweet glowing light
+  - From the moment I first saw you I was yours, and you were mine
+  - Deep down we both knew you were trouble by design
+  - 'And the echo of my mother''s words: Baby, don''t you play with fire'
+  tempoParaCumprir: 60
+  faseTemTempo: 1

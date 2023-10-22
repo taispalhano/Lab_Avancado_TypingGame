@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07610a388c0317b42a82a321930dc697, type: 3}
+  m_Name: Fase 1
+  m_EditorClassIdentifier: 
+  frases:
+  - "Quanto tempo o cora\xE7\xE3o leva pra saber"
+  - "Que o sin\xF4nimo de amar \xE9 sofrer"
+  - Num aroma de amores pode haver espinhos
+  - "\xC9 como ter mulheres e milh\xF5es e ser sozinho"
+  - "Na solid\xE3o de casa, descansar"
+  - O sentido da vida, encontrar
+  - "Ningu\xE9m pode dizer onde a felicidade est\xE1"
+  - "O amor \xE9 feito de paix\xF5es e quando perde a raz\xE3o"
+  - "N\xE3o sabe quem vai machucar"
+  - Quem ama nunca sente medo de contar os seus segredos
+  - "Sin\xF4nimo de amor \xE9 amar"
+  tempoParaCumprir: 120
+  faseTemTempo: 1

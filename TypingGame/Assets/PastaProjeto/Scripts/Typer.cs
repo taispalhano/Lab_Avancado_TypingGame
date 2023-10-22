@@ -5,31 +5,36 @@ using TMPro;
 
 public class Typer : MonoBehaviour
 {
-    public TextMeshProUGUI wordLabel = null;
+    public TextMeshProUGUI palavraPosicao = null;
 
-    [SerializeField] private string fraseRestante;
-    [SerializeField] private string fraseAtual;
-    private int tamanhoUltimaFrase;
+    private string fraseRestante;
+    private string fraseAtual;
+    [SerializeField] private int tamanhoUltimaFrase;
 
-    [SerializeField] private WordPackage pacoteDeFrases;
+    public WordPackage pacoteDeFrases;
 
     public AudioClip errou;
     public AudioClip fraseCorreta;
 
-    private void Start()
+    public List<string> frasesCopia;
+
+    public void OnStart()
     {
-        AtribuirFrase();
+        frasesCopia.Clear();
+        frasesCopia.AddRange(pacoteDeFrases.frases);
     }
-    private void AtribuirFrase()
+    public void AtribuirFrase()
     {
-        fraseAtual = pacoteDeFrases.PegarPalavraAleatoria();
+        if (frasesCopia.Count <= 0) return;
+
+        fraseAtual = frasesCopia[0];
         tamanhoUltimaFrase = fraseAtual.Length;
         AtribuirFraseRestante(fraseAtual);
     }
     private void AtribuirFraseRestante(string novaString)
     {
         fraseRestante = novaString;
-        wordLabel.text = fraseRestante;  
+        palavraPosicao.text = fraseRestante;  
     }
     private void Update()
     {
@@ -54,7 +59,10 @@ public class Typer : MonoBehaviour
             {
                 GameManager.instance._pontos += tamanhoUltimaFrase * 2;
                 GameManager.instance.TocarSom(fraseCorreta);
+
                 tamanhoUltimaFrase = 0;
+
+                frasesCopia.Remove(frasesCopia[0]);
 
                 AtribuirFrase();
             }

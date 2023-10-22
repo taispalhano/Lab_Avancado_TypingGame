@@ -5,7 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Novo Banco de Palavras", menuName ="Typing Game/Banco de Palavras/Novo Banco de Palavras")]
 public class WordPackage : ScriptableObject
 {
-    [SerializeField] private List<string> frases = new List<string>();
+    public List<string> frases = new List<string>();
+    public float tempoParaCumprir = 60f;
+    public bool faseTemTempo = true;
+
 
     public string PegarPalavraAleatoria()
     {
